@@ -1,3 +1,8 @@
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+
+
+
+
 export interface IUser {
     name: string ;
     email: string ;
@@ -5,6 +10,19 @@ export interface IUser {
 }
 
 
-export class User {
 
+
+
+
+
+@Entity()
+export class User {
+    @Column()
+    name: string
+
+    @Column()
+    email: string;
+
+    @Column()
+    password: string;
 }

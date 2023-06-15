@@ -34,14 +34,16 @@ export class AuthController {
 
 
 
-
-
-    @UseGuards(LocalAuthGuard)
     @Post('login')
-    async login(@Request() req) {
-      return this.authService.login(req.user);
+    async login(@Body() loginDto: LoginDto) {
+      const { username, password } = loginDto;
+      const user = await this.authService.validateUser(username, password);
+      const token = await this.authService.generateToken(user);
+      return { token };
     }
   
+
+
 
     @UseGuards(JwtAuthGuard)
     @Get('profile')
